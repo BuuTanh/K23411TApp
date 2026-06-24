@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CategoryNewActivity">
+
+    <TextView
+        android:id="@+id/txtCategoryId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/str_categoryid" />
+
+    <EditText
+        android:id="@+id/edtCategoryId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/txtCategoryName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/str_categoryname" />
+
+    <EditText
+        android:id="@+id/edtCategoryName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/txtCategoryDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/str_categorydescription" />
+
+    <EditText
+        android:id="@+id/edtCategoryDescription"
+        android:layout_width="match_parent"
+        android:layout_height="129dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:onClick="processSaveCategory"
+            android:id="@+id/button7"
+            android:layout_width="215dp"
+            android:layout_height="wrap_content"
+            android:text="@string/str_save" />
+
+        <Button
+            android:onClick="processCancelCategory"
+            android:id="@+id/button8"
+            android:layout_width="198dp"
+            android:layout_height="wrap_content"
+            android:text="@string/str_cancel" />
+    </LinearLayout>
+
+</LinearLayout>

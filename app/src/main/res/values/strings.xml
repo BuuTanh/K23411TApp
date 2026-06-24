@@ -1,0 +1,113 @@
+<resources>
+    <string name="app_name">K23411TApp</string>
+    <string name="str_university">University of Economics and Law</string>
+    <string name="str_your_major">Show your major</string>
+    <string name="str_my_major">Data Science!!!</string>
+    <string name="str_login_system">LOGIN SYSTEM</string>
+    <string name="str_username">User name</string>
+    <string name="hint_username">Enter your username</string>
+    <string name="str_password">Password:</string>
+    <string name="hint_password">Enter your password here</string>
+    <string name="str_login">Login</string>
+    <string name="str_exit">Exit</string>
+    <string name="str_login_successful">Login successful!</string>
+    <string name="str_login_failed">Login failed!</string>
+    <string name="str_mc">MC</string>
+    <string name="str_mr">MR</string>
+    <string name="str_mplus">M+</string>
+    <string name="str_mminus">M-</string>
+    <string name="str_ms">MS</string>
+    <string name="str_m">M</string>
+    <string name="str_open_calculator_app">Open Calculator App</string>
+    <string name="str_save_login_infor">Save Login Information</string>
+    <string name="str_role">Login Role</string>
+    <string name="str_role_administrator">Administrator</string>
+    <string name="str_role_employee">Employee</string>
+    <string name="str_confirm_exit_tittle">Confirm Exit</string>
+    <string name="str_confirm_exit_message">Are you sure you want to exit?</string>
+    <string name="str_confirm_exit_yes">Yes</string>
+    <string name="str_confirm_exit_no">No</string>
+    <string name="str_confirm_exit">Are you sure to exit?</string>
+    <string name="str_id">ID:</string>
+    <string name="str_name">Name:</string>
+    <string name="str_phone">Phone:</string>
+    <string name="str_save">Save</string>
+    <string name="str_clear">Clear</string>
+    <string name="str_delete">Delete</string>
+    <string name="str_msg_select_employee">Vui lòng chọn nhân viên để xóa!</string>
+    <string name="str_title_confirm_delete">Xác nhận xóa</string>
+    <string name="str_msg_confirm_delete">Bạn có thực sự muốn xóa nhân viên này không?</string>
+    <string name="str_btn_yes">Có</string>
+    <string name="str_btn_no">Không</string>
+    <string name="str_msg_delete_success">Đã xóa thành công</string>
+    <string name="str_department">Department</string>
+    <string name="str_employee">Employee(s)</string>
+    <string name="str_birthplace">Birth Place</string>
+    <string name="str_order_management">Order Management</string>
+    <string name="str_from_date">From Date:</string>
+    <string name="str_to_date">To Date:</string>
+    <string name="str_order_status_all">All</string>
+    <string name="str_order_status_completed">Completed</string>
+    <string name="str_order_status_not_payment">Not Payment</string>
+    <string name="str_order_status_on_logistic">On Logistic</string>
+    <string name="str_order_status_complain">Complain</string>
+    <string name="str_category_management">Category Management</string>
+    <string name="str_category_new">New Category</string>
+    <string name="str_category_statistic">Category Statistic</string>
+    <string name="str_categoryid">Category ID:</string>
+    <string name="str_categoryname">Category Name</string>
+    <string name="str_categorydescription">Category Description:</string>
+    <string name="str_cancel">Cancel</string>
+    <string name="str_mycontact_management">My Contact Management</string>
+    <string name="str_phone_incoming">Phone Incoming:</string>
+    <string name="str_date_delivery">Date Delivery:</string>
+    <string name="str_message_body">Message Body:</string>
+    <string name="str_sms_spyware">SMS Spyware</string>
+    <string name="str_number_button">Number of Button:</string>
+    <string name="str_create_button">Create Button</string>
+    <string name="str_multi_thread_demo">Multi Thread Demo</string>
+    <string name="str_number_product">Number Product</string>
+    <string name="str_download_product">Download Product</string>
+    <string name="str_multithreading_object_demo">Multi Thread Object Demo</string>
+    <string name="str_play_audio1">Play Audio 1</string>
+    <string name="str_play_audio2">Play Audio 2</string>
+    <string name="str_uel">University of Economics and Law</string>
+    <string name="str_font_music">Fonts and Musics</string>
+    <string-array name="arr_province">
+        <item>Thành phố Hà Nội</item>
+        <item>Thành phố Hồ Chí Minh</item>
+        <item>Thành phố Hải Phòng</item>
+        <item>Thành phố Đà Nẵng</item>
+        <item>Thành phố Cần Thơ</item>
+        <item>Thành phố Huế</item>
+        <item>Tỉnh Cao Bằng</item>
+        <item>Tỉnh Lạng Sơn</item>
+        <item>Tỉnh Quảng Ninh</item>
+        <item>Tỉnh Lai Châu</item>
+        <item>Tỉnh Điện Biên</item>
+        <item>Tỉnh Sơn La</item>
+        <item>Tỉnh Tuyên Quang</item>
+        <item>Tỉnh Lào Cai</item>
+        <item>Tỉnh Thái Nguyên</item>
+        <item>Tỉnh Phú Thọ</item>
+        <item>Tỉnh Bắc Ninh</item>
+        <item>Tỉnh Hưng Yên</item>
+        <item>Tỉnh Ninh Bình</item>
+        <item>Tỉnh Thanh Hóa</item>
+        <item>Tỉnh Nghệ An</item>
+        <item>Tỉnh Hà Tĩnh</item>
+        <item>Tỉnh Quảng Trị</item>
+        <item>Tỉnh Quảng Ngãi</item>
+        <item>Tỉnh Gia Lai</item>
+        <item>Tỉnh Đắk Lắk</item>
+        <item>Tỉnh Khánh Hòa</item>
+        <item>Tỉnh Lâm Đồng</item>
+        <item>Tỉnh Đồng Nai</item>
+        <item>Tỉnh Tây Ninh</item>
+        <item>Tỉnh An Giang</item>
+        <item>Tỉnh Vĩnh Long</item>
+        <item>Tỉnh Đồng Tháp</item>
+        <item>Tỉnh Cà Mau</item>
+    </string-array>
+
+</resources>

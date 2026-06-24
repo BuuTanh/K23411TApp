@@ -1,0 +1,181 @@
+@startuml
+class com.tranlebuutanh.models.OrderDetail {
+- String orderDetailId
+- String orderId
+- String productId
+- int quantity
+- double price
+- double coupon
+- double VAT
++ String getOrderDetailId()
++ void setOrderDetailId(String)
++ String getOrderId()
++ void setOrderId(String)
++ String getProductId()
++ void setProductId(String)
++ int getQuantity()
++ void setQuantity(int)
++ double getPrice()
++ void setPrice(double)
++ double getCoupon()
++ void setCoupon(double)
++ double getVAT()
++ void setVAT(double)
++ String toString()
+}
+
+
+class com.tranlebuutanh.models.Customer {
+- String cusId
+- String cusName
+- String phone
+- String email
+- Date birthday
+- String address
++ String getCusId()
++ void setCusId(String)
++ String getCusName()
++ void setCusName(String)
++ String getPhone()
++ void setPhone(String)
++ String getEmail()
++ void setEmail(String)
++ Date getBirthday()
++ void setBirthday(Date)
++ String getAddress()
++ void setAddress(String)
++ String toString()
+}
+
+
+class com.tranlebuutanh.models.Order {
+- String orderId
+- String customerId
+- String employeeId
+- Date orderDate
++ String getOrderId()
++ void setOrderId(String)
++ String getCustomerId()
++ void setCustomerId(String)
++ String getEmployeeId()
++ void setEmployeeId(String)
++ Date getOrderDate()
++ void setOrderDate(Date)
++ String toString()
+}
+
+
+class com.tranlebuutanh.models.Employee {
+- String id
+- String name
+- String phone
+- String birthPlace
++ String getBirthPlace()
++ void setBirthPlace(String)
++ void setId(String)
++ String getId()
++ void setName(String)
++ String getName()
++ void setPhone(String)
++ String getPhone()
++ String toString()
+}
+
+
+class com.tranlebuutanh.models.DataWareHouse {
++ {static} ArrayList<Category> getCategories()
++ {static} ArrayList<Product> getProducts()
++ {static} ArrayList<Employee> getEmployees()
++ {static} ArrayList<Customer> getCustomers()
++ {static} ArrayList<Order> getOrders()
+}
+
+class com.tranlebuutanh.models.Department {
+- String departmentId
+- String departmentName
+- ArrayList<Employee> listOfEmployee
++ void addEmployee(Employee)
++ void addListEmployee(ArrayList<Employee>)
++ ArrayList<Employee> getListOfEmployee()
++ String getDepartmentId()
++ void setDepartmentId(String)
++ String getDepartmentName()
++ void setDepartmentName(String)
++ String toString()
+}
+
+
+class com.tranlebuutanh.models.UserAccount {
+- String userName
+- String password
+- String role
+- String displayName
+- boolean saved
++ void setUserName(String)
++ void setPassword(String)
++ void setRole(String)
++ void setDisplayName(String)
++ void setSaved(boolean)
++ String getUserName()
++ String getPassword()
++ String getRole()
++ String getDisplayName()
++ boolean isSaved()
++ String toString()
+}
+
+
+class com.tranlebuutanh.models.ListUserAccount {
++ {static} ArrayList<UserAccount> getUserAccounts()
++ {static} UserAccount login(String,String)
+}
+
+class com.tranlebuutanh.models.Category {
+- String categoryId
+- String categoryName
+- String description
++ String getCategoryId()
++ void setCategoryId(String)
++ String getCategoryName()
++ void setCategoryName(String)
++ String getDescription()
++ void setDescription(String)
++ String toString()
+}
+
+
+class com.tranlebuutanh.models.Product {
+- String productId
+- String productName
+- int quantity
+- double price
+- double coupon
+- double VAT
+- String cateId
++ String getProductId()
++ void setProductId(String)
++ String getProductName()
++ void setProductName(String)
++ int getQuantity()
++ void setQuantity(int)
++ double getPrice()
++ void setPrice(double)
++ double getCoupon()
++ void setCoupon(double)
++ double getVAT()
++ void setVAT(double)
++ String getCateId()
++ void setCateId(String)
++ String toString()
+}
+
+
+
+
+java.io.Serializable <|.. com.tranlebuutanh.models.OrderDetail
+java.io.Serializable <|.. com.tranlebuutanh.models.Customer
+java.io.Serializable <|.. com.tranlebuutanh.models.Order
+java.io.Serializable <|.. com.tranlebuutanh.models.Employee
+java.io.Serializable <|.. com.tranlebuutanh.models.UserAccount
+java.io.Serializable <|.. com.tranlebuutanh.models.Product
+@enduml

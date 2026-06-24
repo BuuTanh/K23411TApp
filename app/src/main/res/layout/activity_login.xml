@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/loginbackground"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <!-- Form wrapper — đúng thứ tự cũ, thêm nền trắng mờ bo góc -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_login_form"
+        android:layout_marginHorizontal="20dp"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="20dp">
+
+        <!-- Title — giữ nguyên vị trí, đổi style -->
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/str_login_system"
+            android:textAlignment="center"
+            android:textColor="#3F51B5"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Username label -->
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/str_username"
+            android:textColor="#3F51B5"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp" />
+
+        <!-- Username input -->
+        <EditText
+            android:id="@+id/edtUserName"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/bg_input_login"
+            android:paddingHorizontal="14dp"
+            android:hint="@string/hint_username"
+            android:inputType="text"
+            android:text="admin"
+            android:textColor="#212121"
+            android:textSize="14sp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Password label -->
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/str_password"
+            android:textColor="#3F51B5"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp" />
+
+        <!-- Password input -->
+        <EditText
+            android:id="@+id/edtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/bg_input_login"
+            android:paddingHorizontal="14dp"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword"
+            android:text="123"
+            android:textColor="#212121"
+            android:textSize="14sp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Role label -->
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/str_role"
+            android:textColor="#3F51B5"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <!-- RadioGroup — giữ nguyên -->
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <RadioButton
+                android:id="@+id/radAdministrator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#424242"
+                android:textSize="13sp"
+                android:text="@string/str_role_administrator" />
+
+            <RadioButton
+                android:id="@+id/radEmployee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#424242"
+                android:textSize="13sp"
+                android:text="@string/str_role_employee" />
+        </RadioGroup>
+
+        <!-- CheckBox — giữ nguyên -->
+        <CheckBox
+            android:id="@+id/chkSaveInfor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:textSize="13sp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/str_save_login_infor" />
+
+        <!-- Buttons row — giữ nguyên 2 nút ngang -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:onClick="loginSystem"
+                android:text="@string/str_login"
+                android:background="@drawable/bg_primary_btn"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:id="@+id/btnExit"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:onClick="exitSystem"
+                android:text="@string/str_exit"
+                android:background="@drawable/bg_danger_btn"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:stateListAnimator="@null" />
+        </LinearLayout>
+
+        <!-- Message — giữ nguyên vị trí -->
+        <TextView
+            android:id="@+id/txtMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:textColor="#EF5350"
+            android:textSize="13sp"
+            android:textStyle="italic" />
+
+    </LinearLayout>
+</LinearLayout>

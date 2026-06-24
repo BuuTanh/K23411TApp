@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="grey">#8A8A8A</color>
+
+    <!-- Brand -->
+    <color name="primary">#3F51B5</color>
+    <color name="primary_dark">#283593</color>
+    <color name="primary_light">#C5CAE9</color>
+    <color name="accent">#FF6D00</color>
+
+    <!-- Order item fields -->
+    <color name="order_id_color">#1565C0</color>
+    <color name="order_date_color">#4E342E</color>
+    <color name="order_total_color">#1B5E20</color>
+    <color name="order_item_bg_even">#FFFFFF</color>
+    <color name="order_item_bg_odd">#F3F6FF</color>
+
+    <!-- Status badge colors -->
+    <color name="status_completed_bg">#C8E6C9</color>
+    <color name="status_completed_text">#1B5E20</color>
+    <color name="status_not_payment_bg">#FFCDD2</color>
+    <color name="status_not_payment_text">#B71C1C</color>
+    <color name="status_on_logistic_bg">#BBDEFB</color>
+    <color name="status_on_logistic_text">#0D47A1</color>
+    <color name="status_complain_bg">#FFE0B2</color>
+    <color name="status_complain_text">#E65100</color>
+    <color name="status_all_bg">#E0E0E0</color>
+    <color name="status_all_text">#424242</color>
+
+    <!-- Header & toolbar -->
+    <color name="header_bg_start">#3F51B5</color>
+    <color name="header_bg_end">#1A237E</color>
+    <color name="filter_bar_bg">#EEF2FF</color>
+    <color name="divider_color">#DADCE0</color>
+
+    <!-- Calculator dark theme -->
+    <color name="calc_bg">#000000</color>
+    <color name="calc_btn_number">#333333</color>
+    <color name="calc_btn_special">#A5A5A5</color>
+    <color name="calc_btn_operator">#FF9F0A</color>
+    <color name="calc_memory_bg">#1C1C1E</color>
+    <color name="calc_memory_text">#AEAEB2</color>
+</resources>

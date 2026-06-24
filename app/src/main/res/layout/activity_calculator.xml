@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000"
+    tools:context=".CalculatorActivity">
+
+    <!-- Display — giữ nguyên EditText, đổi style -->
+    <EditText
+        android:id="@+id/edtFormular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:ems="10"
+        android:inputType="text"
+        android:textSize="50sp"
+        android:textColor="#FFFFFF"
+        android:gravity="end|center_vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        android:singleLine="true" />
+
+    <!-- Memory row — giữ nguyên LinearLayout + 6 TextView -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#1C1C1E"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:id="@+id/txtMC"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/str_mc"
+            android:textColor="#AEAEB2"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:paddingVertical="4dp" />
+
+        <TextView
+            android:id="@+id/txtMR"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/str_mr"
+            android:textColor="#AEAEB2"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:paddingVertical="4dp" />
+
+        <TextView
+            android:id="@+id/txtMPlus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/str_mplus"
+            android:textColor="#AEAEB2"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:paddingVertical="4dp" />
+
+        <TextView
+            android:id="@+id/txtMMinus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/str_mminus"
+            android:textColor="#AEAEB2"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:paddingVertical="4dp" />
+
+        <TextView
+            android:id="@+id/txtMS"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/str_ms"
+            android:textColor="#AEAEB2"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:paddingVertical="4dp" />
+
+        <TextView
+            android:id="@+id/txtM"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/str_m"
+            android:textColor="#AEAEB2"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:paddingVertical="4dp" />
+    </LinearLayout>
+
+    <!-- TableLayout — giữ nguyên cấu trúc, đổi màu từng nút -->
+    <TableLayout
+        android:stretchColumns="*"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp">
+
+        <!-- Row 1: % CE C Del — special (gray) -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btnPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_special"
+                android:text="%"
+                android:textColor="#1C1C1E"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btnCE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_special"
+                android:text="CE"
+                android:textColor="#1C1C1E"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btnC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_special"
+                android:text="C"
+                android:textColor="#1C1C1E"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:id="@+id/btnDel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_special"
+                android:text="Del"
+                android:textColor="#1C1C1E"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null" />
+        </TableRow>
+
+        <!-- Row 2: 1/x x^2 sqrt : -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btn1_x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_special"
+                android:text="1/x"
+                android:textColor="#1C1C1E"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btnx_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_special"
+                android:text="x^2"
+                android:textColor="#1C1C1E"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btnsqrt_x"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_special"
+                android:text="sqrt(x)"
+                android:textColor="#1C1C1E"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btnDevide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_operator"
+                android:text=":"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null" />
+        </TableRow>
+
+        <!-- Row 3: 7 8 9 × -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btn7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_number"
+                android:text="7"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btn8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_number"
+                android:text="8"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btn9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_number"
+                android:text="9"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btnMultiply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_operator"
+                android:text="x"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null" />
+        </TableRow>
+
+        <!-- Row 4: 4 5 6 - -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btn4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_number"
+                android:text="4"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btn5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_number"
+                android:text="5"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btn6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_number"
+                android:text="6"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btnMinus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_operator"
+                android:text="-"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null" />
+        </TableRow>
+
+        <!-- Row 5: 1 2 3 + -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btn1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_number"
+                android:text="1"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btn2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_number"
+                android:text="2"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btn3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_number"
+                android:text="3"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btnPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_operator"
+                android:text="+"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null" />
+        </TableRow>
+
+        <!-- Row 6: +/- 0 , = -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btnPlus_Minus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_number"
+                android:text="+/-"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btn0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_number"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:onClick="processInputData"
+                android:id="@+id/btnComma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_number"
+                android:text=","
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:stateListAnimator="@null" />
+
+            <Button
+                android:id="@+id/btnCalculate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:background="@drawable/bg_calc_btn_operator"
+                android:text="="
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null" />
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>
