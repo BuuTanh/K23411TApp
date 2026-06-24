@@ -109,6 +109,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openFirebaseContactActivity(View view) {
+        Intent intent = new Intent(MainActivity.this, FirebaseContactActivity.class);
+        startActivity(intent);
+    }
+
     public void openFontAndMusicActivity(View view) {
         Intent intent = new Intent(MainActivity.this, FontAndMusicActivity.class);
         startActivity(intent);

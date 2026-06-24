@@ -198,6 +198,19 @@
                 android:stateListAnimator="@null" />
 
             <Button
+                android:id="@+id/btnFirebaseContact"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:onClick="openFirebaseContactActivity"
+                android:text="🔥 Firebase Contact"
+                android:background="@drawable/bg_primary_btn"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:stateListAnimator="@null" />
+
+            <Button
                 android:onClick="openFontAndMusicActivity"
                 android:id="@+id/button13"
                 android:layout_width="match_parent"

@@ -30,6 +30,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.K23411TApp">
         <activity
+            android:name=".FirebaseContactActivity"
+            android:exported="false" />
+        <activity
             android:name=".FontAndMusicActivity"
             android:exported="false" />
         <activity
