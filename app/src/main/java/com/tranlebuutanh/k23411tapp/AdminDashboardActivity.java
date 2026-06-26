@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,6 +37,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class AdminDashboardActivity extends AppCompatActivity {
 
@@ -45,6 +49,8 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
     private Date filterFromDate, filterToDate;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +93,16 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
         btnSyncAll.setOnClickListener(v -> {
             if (isOnline()) {
-                Toast.makeText(this, "Syncing all data to Firebase...", Toast.LENGTH_SHORT).show();
-                FirebaseSyncHelper.syncAllDataToFirebase();
-                Toast.makeText(this, "Sync completed!", Toast.LENGTH_LONG).show();
+                btnSyncAll.setEnabled(false);
+                btnSyncAll.setText("Syncing...");
+                executor.execute(() -> {
+                    FirebaseSyncHelper.syncAllDataToFirebase();
+                    mainHandler.post(() -> {
+                        btnSyncAll.setEnabled(true);
+                        btnSyncAll.setText("Sync All Data to Firebase");
+                        Toast.makeText(this, "Sync completed!", Toast.LENGTH_LONG).show();
+                    });
+                });
             } else {
                 Toast.makeText(this, "No internet connection", Toast.LENGTH_SHORT).show();
             }
@@ -116,73 +129,88 @@ public class AdminDashboardActivity extends AppCompatActivity {
     }
 
     private void loadDashboard(Date fromDate, Date toDate) {
-        ArrayList<Order> orders;
-        if (fromDate != null && toDate != null) {
-            orders = DataWareHouse.filterOrdersByDate(fromDate, toDate);
-        } else {
-            orders = DataWareHouse.getOrders();
-        }
+        txtTotalRevenue.setText("Loading...");
+        txtTotalOrders.setText("...");
 
-        ArrayList<OrderDetail> allDetails = DataWareHouse.getOrderDetails();
-        ArrayList<Product> products = DataWareHouse.getProducts();
+        executor.execute(() -> {
+            ArrayList<Order> orders;
+            if (fromDate != null && toDate != null) {
+                orders = DataWareHouse.filterOrdersByDate(fromDate, toDate);
+            } else {
+                orders = DataWareHouse.getOrders();
+            }
 
-        // Total Revenue
-        double totalRevenue = 0;
-        for (Order o : orders) {
-            totalRevenue += DataWareHouse.sumOfMoneyForOrder(o);
-        }
-        NumberFormat nf = NumberFormat.getInstance(new Locale("vi", "VN"));
-        txtTotalRevenue.setText(nf.format(totalRevenue) + " VND");
-        txtTotalOrders.setText(String.valueOf(orders.size()));
-        txtTotalProducts.setText(String.valueOf(products.size()));
-        txtTotalCustomers.setText(String.valueOf(DataWareHouse.getCustomers().size()));
+            ArrayList<OrderDetail> allDetails = DataWareHouse.getOrderDetails();
+            ArrayList<Product> products = DataWareHouse.getProducts();
+            int customerCount = DataWareHouse.getCustomers().size();
 
-        // Top Customers by spending
-        HashMap<String, Double> customerSpend = new HashMap<>();
-        for (Order o : orders) {
-            double amount = DataWareHouse.sumOfMoneyForOrder(o);
-            customerSpend.put(o.getCustomerId(), customerSpend.getOrDefault(o.getCustomerId(), 0.0) + amount);
-        }
-
-        ArrayList<Map.Entry<String, Double>> sortedCustomers = new ArrayList<>(customerSpend.entrySet());
-        Collections.sort(sortedCustomers, (a, b) -> Double.compare(b.getValue(), a.getValue()));
-
-        ArrayList<String> topCustomerStrings = new ArrayList<>();
-        int count = 0;
-        for (Map.Entry<String, Double> entry : sortedCustomers) {
-            if (count >= 5) break;
-            topCustomerStrings.add((count + 1) + ". " + entry.getKey() + "  -  " + nf.format(entry.getValue()) + " VND");
-            count++;
-        }
-        lvTopCustomers.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, topCustomerStrings));
-
-        // Top Products by quantity sold
-        HashMap<String, Integer> productSold = new HashMap<>();
-        for (Order o : orders) {
+            // Pre-compute order totals using detail map
+            HashMap<String, Double> orderTotals = new HashMap<>();
             for (OrderDetail d : allDetails) {
-                if (d.getOrderId().equals(o.getOrderId())) {
-                    productSold.put(d.getProductId(), productSold.getOrDefault(d.getProductId(), 0) + d.getQuantity());
+                double amount = d.getQuantity() * d.getPrice() * (1 - d.getCoupon()) * (1 + d.getVAT());
+                orderTotals.put(d.getOrderId(), orderTotals.getOrDefault(d.getOrderId(), 0.0) + amount);
+            }
+
+            double totalRevenue = 0;
+            HashMap<String, Double> customerSpend = new HashMap<>();
+            for (Order o : orders) {
+                double amt = orderTotals.getOrDefault(o.getOrderId(), 0.0);
+                totalRevenue += amt;
+                customerSpend.put(o.getCustomerId(), customerSpend.getOrDefault(o.getCustomerId(), 0.0) + amt);
+            }
+
+            // Top products by qty sold (only for filtered orders)
+            HashMap<String, Integer> productSold = new HashMap<>();
+            for (Order o : orders) {
+                for (OrderDetail d : allDetails) {
+                    if (d.getOrderId().equals(o.getOrderId())) {
+                        productSold.put(d.getProductId(), productSold.getOrDefault(d.getProductId(), 0) + d.getQuantity());
+                    }
                 }
             }
-        }
 
-        ArrayList<Map.Entry<String, Integer>> sortedProducts = new ArrayList<>(productSold.entrySet());
-        Collections.sort(sortedProducts, (a, b) -> Integer.compare(b.getValue(), a.getValue()));
+            // Sort
+            ArrayList<Map.Entry<String, Double>> sortedCustomers = new ArrayList<>(customerSpend.entrySet());
+            Collections.sort(sortedCustomers, (a, b) -> Double.compare(b.getValue(), a.getValue()));
 
-        HashMap<String, String> productNameMap = new HashMap<>();
-        for (Product p : products) {
-            productNameMap.put(p.getProductId(), p.getProductName());
-        }
+            ArrayList<Map.Entry<String, Integer>> sortedProducts = new ArrayList<>(productSold.entrySet());
+            Collections.sort(sortedProducts, (a, b) -> Integer.compare(b.getValue(), a.getValue()));
 
-        ArrayList<String> topProductStrings = new ArrayList<>();
-        count = 0;
-        for (Map.Entry<String, Integer> entry : sortedProducts) {
-            if (count >= 5) break;
-            String name = productNameMap.getOrDefault(entry.getKey(), entry.getKey());
-            topProductStrings.add((count + 1) + ". " + name + "  -  " + entry.getValue() + " sold");
-            count++;
-        }
-        lvTopProducts.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, topProductStrings));
+            HashMap<String, String> productNameMap = new HashMap<>();
+            for (Product p : products) {
+                productNameMap.put(p.getProductId(), p.getProductName());
+            }
+
+            NumberFormat nf = NumberFormat.getInstance(new Locale("vi", "VN"));
+            double finalTotalRevenue = totalRevenue;
+            int orderSize = orders.size();
+
+            ArrayList<String> topCustStrings = new ArrayList<>();
+            int count = 0;
+            for (Map.Entry<String, Double> entry : sortedCustomers) {
+                if (count >= 5) break;
+                topCustStrings.add((count + 1) + ". " + entry.getKey() + "  -  " + nf.format(entry.getValue()) + " VND");
+                count++;
+            }
+
+            ArrayList<String> topProdStrings = new ArrayList<>();
+            count = 0;
+            for (Map.Entry<String, Integer> entry : sortedProducts) {
+                if (count >= 5) break;
+                String name = productNameMap.getOrDefault(entry.getKey(), entry.getKey());
+                topProdStrings.add((count + 1) + ". " + name + "  -  " + entry.getValue() + " sold");
+                count++;
+            }
+
+            mainHandler.post(() -> {
+                txtTotalRevenue.setText(nf.format(finalTotalRevenue) + " VND");
+                txtTotalOrders.setText(String.valueOf(orderSize));
+                txtTotalProducts.setText(String.valueOf(products.size()));
+                txtTotalCustomers.setText(String.valueOf(customerCount));
+                lvTopCustomers.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, topCustStrings));
+                lvTopProducts.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, topProdStrings));
+            });
+        });
     }
 
     private void checkFirebaseStatus() {
@@ -210,5 +238,11 @@ public class AdminDashboardActivity extends AppCompatActivity {
         if (cm == null) return false;
         NetworkInfo info = cm.getActiveNetworkInfo();
         return info != null && info.isConnected();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        executor.shutdownNow();
     }
 }

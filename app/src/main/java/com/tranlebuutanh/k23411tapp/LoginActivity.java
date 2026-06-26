@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView txtMessage;
     CheckBox chkSaveInfor;
     String name_share_ref="LoginInfor";
-    RadioButton radAdministrator,radEmployee;
+    RadioButton radAdministrator,radEmployee,radClient;
     Button btnLogin;
     BroadcastReceiver internetStateReceiver=new BroadcastReceiver() {
         @Override
@@ -129,6 +129,7 @@ public class LoginActivity extends AppCompatActivity {
         chkSaveInfor=findViewById(R.id.chkSaveInfor);
         radAdministrator=findViewById(R.id.radAdministrator);
         radEmployee=findViewById(R.id.radEmployee);
+        radClient=findViewById(R.id.radClient);
         btnLogin=findViewById(R.id.btnLogin);
     }
 
@@ -150,6 +151,11 @@ public class LoginActivity extends AppCompatActivity {
             {
                 Intent intent=new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra("USER_ACCOUNT", acc);
+                startActivity(intent);
+            }
+            else if(radClient.isChecked())
+            {
+                Intent intent=new Intent(LoginActivity.this, ClientViewActivity.class);
                 startActivity(intent);
             }
             else
