@@ -118,4 +118,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, FontAndMusicActivity.class);
         startActivity(intent);
     }
+
+    public void openAdminDashboard(View view) {
+        Intent intent = new Intent(MainActivity.this, AdminDashboardActivity.class);
+        startActivity(intent);
+    }
 }

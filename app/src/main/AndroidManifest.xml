@@ -30,6 +30,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.K23411TApp">
         <activity
+            android:name=".ClientViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminDashboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".FirebaseContactActivity"
             android:exported="false" />
         <activity

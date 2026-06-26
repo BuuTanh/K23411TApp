@@ -217,6 +217,19 @@
                 android:layout_height="wrap_content"
                 android:text="@string/str_font_music" />
 
+            <Button
+                android:id="@+id/btnAdminDashboard"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:onClick="openAdminDashboard"
+                android:text="Admin Dashboard (Firebase)"
+                android:background="@drawable/bg_primary_btn"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:stateListAnimator="@null" />
+
         </LinearLayout>
     </ScrollView>
 
