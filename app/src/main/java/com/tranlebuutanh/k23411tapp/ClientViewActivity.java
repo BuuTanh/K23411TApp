@@ -93,6 +93,10 @@ public class ClientViewActivity extends AppCompatActivity {
                     String desc = child.child("description").getValue(String.class);
                     categories.add(new Category(id, name != null ? name : "", desc != null ? desc : ""));
                 }
+                if (categories.isEmpty()) {
+                    loadFromLocal();
+                    return;
+                }
                 buildCategoryButtons();
                 loadProductsFromFirebase();
             }
@@ -122,6 +126,10 @@ public class ClientViewActivity extends AppCompatActivity {
                             price != null ? price : 0,
                             0, 0,
                             catId != null ? catId : ""));
+                }
+                if (allProducts.isEmpty()) {
+                    loadFromLocal();
+                    return;
                 }
                 txtClientStatus.setText("Online - Firebase");
                 filterAndDisplay();
